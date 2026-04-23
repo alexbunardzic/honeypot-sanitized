@@ -18,8 +18,20 @@ it("should accept a string of 15 characters or less", () => {
   expect(result).toEqual("ok");
 });
 
-it("should not accept a string with full empty spaces", () => {
-    const result = sanitizeFormData("               ");
+it("should not accept a URL in a comment", () => {
+  const result = sanitizeFormData("http://evil.com");
 
-    expect(result).toEqual("I do not accept an empty string");
+  expect(result).toBe("I do not accept a URL");
+});
+
+it("reject scripts in the form data", () => {
+  const result = sanitizeFormData("<script>");
+
+  expect(result).toBe("I do not accept scripts in the form data");
+});
+
+it("rejects image tags", () => {
+  const result = sanitizeFormData("<img src=");
+
+  expect(result).toBe("I do not accept image tags");
 });
