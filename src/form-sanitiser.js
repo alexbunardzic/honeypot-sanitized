@@ -1,5 +1,5 @@
 module.exports = function sanitizeFormData(formData) {
-  if (formData === "") {
+  if (formData.trim() === "") {
     return "I do not accept an empty string";
   }
 

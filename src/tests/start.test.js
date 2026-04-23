@@ -17,3 +17,9 @@ it("should accept a string of 15 characters or less", () => {
 
   expect(result).toEqual("ok");
 });
+
+it("should not accept a string with full empty spaces", () => {
+    const result = sanitizeFormData("               ");
+
+    expect(result).toEqual("I do not accept an empty string");
+});
