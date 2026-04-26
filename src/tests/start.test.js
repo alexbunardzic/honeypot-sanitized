@@ -6,6 +6,12 @@ it("should not accept an empty string", () => {
   expect(result).toBe("I do not accept an empty string");
 });
 
+it("should not accept a string with full empty spaces", () => {
+    const result = sanitizeFormData("               ");
+
+    expect(result).toEqual("I do not accept an empty string");
+});
+
 it("should not accept a string longer than 15 characters", () => {
   const result = sanitizeFormData("12334567890123456");
 
